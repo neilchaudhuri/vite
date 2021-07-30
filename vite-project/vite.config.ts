@@ -25,7 +25,7 @@ export default defineConfig({
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'React'
+          react: 'React'
         }
       }
     }
