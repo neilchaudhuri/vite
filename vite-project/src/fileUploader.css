@@ -1,0 +1,3 @@
+div.c1ds-progress-track>div[role="progressbar"] {
+    background-image: linear-gradient( to right, #0071BC 0%, #65B2E8 100% );
+}

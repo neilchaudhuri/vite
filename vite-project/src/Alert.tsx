@@ -1,18 +1,20 @@
 import React, { useReducer, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowForwardIosSharp, WarningSharp, ErrorSharp, ArrowBackIosSharp } from "@material-ui/icons"
-import { Text, Box, PseudoBox, Flex, Grid, BoxProps, useTheme } from "@chakra-ui/core"
+import { Text, Box, PseudoBox, Flex, Grid, BoxProps, ColorModeProvider, useTheme, Link, useColorMode } from "@chakra-ui/core"
+import { LinkProps, linkStyle } from "./Link"
+import { Omit } from "@chakra-ui/core/dist/common-types"
 
 export type AlertStatus = "warning" | "error"
 
 export interface AlertMessage {
 	status: AlertStatus
 	message: React.ReactNode
-
 }
 
 interface AlertProps {
 	messages: AlertMessage[]
+	readMore: LinkProps
 }
 
 enum AlertActionTypes {
@@ -69,12 +71,19 @@ export const Alerts: React.FC<AlertProps> = (p: AlertProps) => {
 		},
 	}
 
+	const readMore = (
+		<ColorModeProvider value={p.messages[alertState.index].status === "warning" ? "light" : "dark"}>
+			<ReadMore {...p.readMore} pl={8}>
+				Read more.
+			</ReadMore>
+		</ColorModeProvider>
+	)
 
 	const alertContents = (
 		<>
 			<Box as={alertStyle[p.messages[alertState.index].status].icon} mx={8} />
 			<Text margin="0" padding="0" flex="auto">
-				{p.messages[alertState.index].message}
+				{p.messages[alertState.index].message} {readMore}
 			</Text>
 		</>
 	)
@@ -200,3 +209,24 @@ const alertReducer = (state: AlertState, action: AlertAction) => {
 			return state
 	}
 }
+
+const ReadMore: React.FC<LinkProps> = (p: LinkProps) => {
+	const { children, ref, as, ...props } = p
+	const { colorMode } = useColorMode()
+
+	return (
+		<Link
+			{...props}
+			// @ts-ignore
+			as={as}
+			{...styles[colorMode].default}
+			_hover={styles[colorMode].hover}
+			_focus={styles[colorMode].focus}
+			_visited={styles[colorMode].visited}
+			transition="none">
+			{children}
+		</Link>
+	)
+}
+
+const styles = { ...linkStyle, light: { ...linkStyle.light, default: "alerts.readMore" } }
