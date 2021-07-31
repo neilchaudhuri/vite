@@ -5,6 +5,7 @@ build/
 .cache/
 *.log*
 storybook-static/
+coverage/
 
 # Editor directories and files
 .idea
