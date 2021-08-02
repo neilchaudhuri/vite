@@ -1,13 +1,29 @@
 {
-  "name": "vite-project",
-  "version": "0.0.0",
+  "name": "@csm/react-component-library",
+  "author": "Consular System Modernization",
+  "description": "Consular One Design System (C1DS) React Component Library (RCL) for user interfaces consistent with UX specifications of the Consular One brand.",
+  "version": "2.1.0+C1DSv1.2",
+  "keywords": [
+    "c1ds",
+    "Consular One",
+    "rcl",
+    "CSM",
+    "css",
+    "react",
+    "ux",
+    "ui"
+  ],
+  "license": "UNLICENSED",
   "scripts": {
+    "clean": "rimraf dist && rimraf build",
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --coverage",
-    "test:basic": "jest"
+    "test:basic": "jest",
+    "package": "npm run clean && npm run build && mkdir build && cpy dist build --parents && cpy theme.js build/dist && cpy .npmignore build && cpy package.json build && cd build && npm pack --dry-run",
+    "abc": "cpy dist build --parents"
   },
   "prettier": {
     "printWidth": 130,
@@ -89,6 +105,8 @@
     "autoprefixer": "^10.3.1",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
+    "cpy": "^8.1.2",
+    "cpy-cli": "^3.1.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^3.9.0",
@@ -108,5 +126,17 @@
     "tslib": "^2.3.0",
     "typescript": "^4.3.2",
     "vite": "^2.4.4"
+  },
+  "files": ["dist"],
+  "main": "./dist/components.umd.js",
+  "module": "./dist/components.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/components.es.js",
+      "require": "./dist/components.umd.js"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://nexus-npe.ca.state.sbu/repository/CSM_NPM_Repo/"
   }
 }
