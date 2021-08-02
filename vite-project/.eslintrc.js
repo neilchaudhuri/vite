@@ -31,6 +31,9 @@ module.exports = {
 		"no-unused-vars": 0,
 		"react/no-children-prop": 0,
 		"react/display-name": 0,
-		'react/prop-types': 0
+		'react/prop-types': 0,
+		"no-undef": 0,
+		"testing-library/prefer-screen-queries": 0,
+		"testing-library/no-node-access": 0
 	},
 }
