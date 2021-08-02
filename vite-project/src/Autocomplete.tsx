@@ -2,7 +2,7 @@ import { Text, useTheme } from "@chakra-ui/core"
 import React from "react"
 import { Option } from "./Option"
 
-export const generateOptions: (label: string, inputValue: string) => (undefined | JSX.Element)[] = (
+export const generateOptions: (label: string, inputValue: string) => (undefined | Element)[] = (
 	label: string,
 	inputValue: string
 ) => {

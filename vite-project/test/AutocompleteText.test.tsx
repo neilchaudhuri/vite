@@ -42,8 +42,8 @@ describe("Basic AutocompleteText function", () => {
 
 	const setup = () => {
 		const onChange = jest.fn()
-		const component = renderWithTheme(<AutocompleteTextTest onChange={onChange} />)
-		const autocomplete = component.getByRole("textbox", { name: "Autocomplete" })
+		const view = renderWithTheme(<AutocompleteTextTest onChange={onChange} />)
+		const autocomplete = view.getByRole("textbox", { name: "Autocomplete" })
 		return {
 			autocomplete,
 			onChange,

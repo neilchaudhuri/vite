@@ -7,6 +7,7 @@ import theme from "./theme"
 export const renderWithTheme: (ui: React.ReactElement) => RenderResult = ui => {
 	const Wrapper: FC = (props: { children?: React.ReactNode }) => (
 		// @ts-ignore
+		// eslint-disable-next-line testing-library/no-node-access
 		<ThemeProvider theme={theme}>{props?.children}</ThemeProvider>
 	)
 
@@ -18,6 +19,7 @@ export const renderWithDarkTheme: (ui: React.ReactElement) => RenderResult = ui 
 		// @ts-ignore
 		<ThemeProvider theme={theme}>
 			<ColorModeProvider value="dark">
+				{/* eslint-disable-next-line testing-library/no-node-access */}
 				{props?.children}
 			</ColorModeProvider>
 		</ThemeProvider>
