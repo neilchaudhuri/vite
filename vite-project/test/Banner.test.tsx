@@ -6,7 +6,7 @@ import "@testing-library/jest-dom"
 import userEvent from "@testing-library/user-event"
 // @ts-ignore
 import theme from "./theme"
-import chakra, { useToast } from "@chakra-ui/core"
+import { useToast } from "@chakra-ui/core"
 
 jest.doMock("../theme.js", () => ({
 	default: theme,
@@ -14,7 +14,7 @@ jest.doMock("../theme.js", () => ({
 import { Banner, useBanner } from "../src/Banner"
 
 jest.mock("@chakra-ui/core", () => {
-	const originalChakra = jest.requireActual<typeof chakra>("@chakra-ui/core")
+	const originalChakra = jest.requireActual("@chakra-ui/core")
 	return {
 		...originalChakra,
 		useToast: jest.fn().mockImplementation(() => {
