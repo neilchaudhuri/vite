@@ -12,12 +12,12 @@ const options = [
 		label: "Armed Forces - AA"
 	},
 	{
-		value: "AE",
-		label: "Armed Forces - AE"
-	},
-	{
 		value: "AK",
 		label: "Alaska"
+	},
+	{
+		value: "CA",
+		label: "California"
 	},
 	{
 		value: "AL",
@@ -38,10 +38,6 @@ const options = [
 	{
 		value: "AZ",
 		label: "Arizona"
-	},
-	{
-		value: "CA",
-		label: "California"
 	}
 ]
 
@@ -68,11 +64,11 @@ describe("Basic Select functionality", () => {
 		const select = setup(<SelectTest onChange={onChangeMock} />)
 
 		userEvent.click(select)
-		const alabamaOpt = await screen.findByRole("option", { name: "Alabama", selected: false })
-		userEvent.click(alabamaOpt)
+		const alaskaOpt = await screen.findByRole("option", { name: "Alaska", selected: false })
+		userEvent.click(alaskaOpt)
 
-		expect(screen.getByRole("option", { name: "Alabama", selected: true })).toBeInTheDocument()
-		expect(onChangeMock).toHaveBeenCalledWith("AL")
+		expect(screen.getByRole("option", { name: "Alaska", selected: true })).toBeInTheDocument()
+		expect(onChangeMock).toHaveBeenCalledWith("AK")
 	})
 
 	test("Select keyboard selection works", async () => {
@@ -82,7 +78,7 @@ describe("Basic Select functionality", () => {
 		select.focus()
 		userEvent.type(select, "{enter}", { skipClick: true })
 
-		await screen.findByRole("option", { name: "Alabama", selected: false })
+		await screen.findByRole("option", { name: "Alaska", selected: false })
 		userEvent.type(select, "Cal{enter}", { skipClick: true })
 
 		expect(onChangeMock).toHaveBeenCalledWith("CA")
